@@ -1,0 +1,93 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+#negativeGameEvent{
+    background-color:orange;
+    border: solid 1px red;
+}
+
+#positiveGameEvent {
+    background-color: lightblue;
+    border: solid 1px blue;
+}
+
+#shoplogo{
+    width:100px;
+    height:auto;
+    float:right;
+}
+
+.SMInfo {
+    background-color: lightgreen;
+    border: solid 1px black;
+}
+
+.SMWarning {
+    background-color: darkorange;
+    border: solid 2px black;
+}
+.SMError {
+    background-color: darkorange;
+    border: solid 5px black;
+}
+
+.fue{
+    background-color:gray;
+    border: solid 2px white;
+}
+
+.att {
+    background-color: greenyellow;
+    border: solid 2px white;
+}
+
+.def {
+    background-color: aqua;
+    border: solid 2px white;
+}
+
+.show {
+    background-color: yellow;
+    border: solid 5px white;
+}
+
+.shopItemLink {
+    color: black;
+    text-decoration: none;
+}
+#homelogo {
+    width: 50px;
+    height: auto;
+    float: left;
+}
+
+#playerInfo {
+    background-color: sandybrown;
+    border: solid 1px saddlebrown;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding:20px;
+}

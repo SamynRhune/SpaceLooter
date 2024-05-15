@@ -1,0 +1,22 @@
+﻿@using ActionCommandGame.Services.Model.Results
+@model PlayerItemResult
+
+<tr>
+    <td>@Model.PlayerId</td>
+    <td>@Model.ItemId</td>
+    <td>@Model.RemainingAttack</td>
+    <td>@Model.RemainingFuel</td>
+    <td>@Model.RemainingDefense</td>
+    <td>
+        <a asp-action="PlayerItemEdit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+        <a asp-action="PlayerItemDelete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        @* <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" 
+                data-bs-toggle="modal" 
+                data-bs-target="#deleteModal"
+                data-id="@Model.Id"
+                data-role="Delete">
+            Delete with modal
+        </button> *@
+    </td>
+</tr>

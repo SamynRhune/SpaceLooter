@@ -1,0 +1,91 @@
+﻿@using ActionCommandGame.Services.Model.Core
+@using ActionCommandGame.Services.Model.Results
+@model GameOverview;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <a asp-controller="Home" asp-action="Index"><img id="homelogo" src="~/img/home.png" alt="homeLogo" /></a>
+    <a  asp-controller="Shop" asp-action="Index" asp-route-playerId="@Model.GameResult.Player.Id"><img id="shoplogo" src="~/img/shop.png" alt="shoplogo" /></a>
+
+    <h1 class="display-4">Space Looter</h1>
+    
+    <a class="btn btn-primary" asp-controller="Game" asp-action="Loot" asp-route-playerId="@Model.GameResult.Player.Id">Loot</a>
+    @{
+        if(@Model.GameResult.PositiveGameEvent == null)
+        {
+            if (Model.ServiceMessages == null || @Model.ServiceMessages.Count == 0)
+            {
+                <p>Press Loot to begin</p>
+            }
+            
+        }
+        else
+        {
+            <p id="positiveGameEvent">@Model.GameResult.PositiveGameEvent.Name<br /> @Model.GameResult.PositiveGameEvent.Description <br /> +@Model.GameResult.PositiveGameEvent.Money Money <br /> +@Model.GameResult.PositiveGameEvent.Experience Experience</p>
+            if(Model.GameResult.NegativeGameEvent != null)
+            {
+                <p id="negativeGameEvent">@Model.GameResult.NegativeGameEvent.Name<br />@Model.GameResult.NegativeGameEvent.Description</p>
+            }
+            else
+            {
+                <p>No negative game events</p>
+            }
+        }
+        if(Model.GameResult != null && Model.GameResult.NegativeGameEventMessages != null)
+        {
+            foreach (ServiceMessage serviceMessage in Model.GameResult.NegativeGameEventMessages)
+            {
+                var klasse = "SM" + @serviceMessage.MessagePriority;
+
+                <div class=@klasse>
+                    <h3>@serviceMessage.MessagePriority</h3>
+                    <p class="">@serviceMessage.Message</p>
+                </div>
+            }
+        }
+        if(Model.ServiceMessages != null && Model.ServiceMessages.Count > 0)
+        {
+            foreach (ServiceMessage serviceMessage in Model.ServiceMessages)
+            {
+                var klasse = "SM" + @serviceMessage.MessagePriority;
+
+                <div class=@klasse>
+                    <h3>@serviceMessage.MessagePriority</h3>
+                    <p class="">@serviceMessage.Message</p>
+                </div>
+            }
+        }
+
+    }
+    @{
+        
+        var attackPlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentAttackPlayerItemId);
+        var defensePlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentDefensePlayerItemId);
+        var fuelPlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentFuelPlayerItemId);
+        ItemResult attackItem = null;
+        ItemResult defenseItem = null;
+        ItemResult fuelItem = null;
+        if(attackPlayerItem != null)
+        {
+            attackItem = Model.Items.ToList().Find(a => a.Id == attackPlayerItem.ItemId);
+        }        
+        if(defensePlayerItem != null)
+        {
+            defenseItem = Model.Items.ToList().Find(a => a.Id == defensePlayerItem.ItemId);
+        }
+        if(fuelPlayerItem != null)
+        {
+            fuelItem = Model.Items.ToList().Find(a => a.Id == fuelPlayerItem.ItemId);
+        }
+        
+
+    }
+    
+    <footer id="playerInfo">
+        <p>@User.Identity.Name - Money:@Model.GameResult.Player.Money -  Experience:@Model.GameResult.Player.Experience</p>
+        <p>@(attackItem != null ? attackItem.Name + " [" + @attackPlayerItem.RemainingAttack + "/" + @attackItem.Attack + "]" : "[Empty]") - @(defenseItem != null ? defenseItem.Name + " [" + @defensePlayerItem.RemainingDefense + "/" + @defenseItem.Defense + "]" : "[Empty]") - @(fuelItem != null ? fuelItem.Name + " [" + @fuelPlayerItem.RemainingFuel + "/" + @fuelItem.Fuel + "]" : "[Empty]") </p>
+
+    </footer>
+</div>

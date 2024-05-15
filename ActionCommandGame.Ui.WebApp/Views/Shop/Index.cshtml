@@ -1,0 +1,71 @@
+﻿@using ActionCommandGame.Services.Model.Core
+@using ActionCommandGame.Services.Model.Results
+@model GameOverview
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<div class="text-center">
+    <div>
+        <a asp-controller="Home" asp-action="Index"><img id="homelogo" src="~/img/home.png" alt="homeLogo" /></a>
+        <a asp-controller="Game" asp-action="Index"><img id="shoplogo" src="~/img/lootLogo.png" alt="lootLogo" /></a>
+        <h1 class="display-4">Space Looter</h1>
+        @{
+            if (Model.GameResult != null && Model.GameResult.NegativeGameEventMessages != null)
+            {
+                foreach (ServiceMessage serviceMessage in Model.GameResult.NegativeGameEventMessages)
+                {
+                    var klasse = "SM" + @serviceMessage.MessagePriority;
+
+                    <div class=@klasse>
+                        <h3>@serviceMessage.MessagePriority</h3>
+                        <p class="">@serviceMessage.Message</p>
+                    </div>
+                }
+            }
+        }
+
+        <h2>SHOP</h2>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model.Items)
+            {
+                var viewData = new ViewDataDictionary(ViewData)
+                {
+                    { "PlayerId", Model.GameResult.Player.Id }
+                };
+
+                @Html.Partial("ItemPartial", item, viewData)
+            }
+        </div>
+    </div>
+</div>
+
+@{
+    var attackPlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentAttackPlayerItemId);
+    var defensePlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentDefensePlayerItemId);
+    var fuelPlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentFuelPlayerItemId);
+    ItemResult attackItem = null;
+    ItemResult defenseItem = null;
+    ItemResult fuelItem = null;
+    if (attackPlayerItem != null)
+    {
+        attackItem = Model.Items.ToList().Find(a => a.Id == attackPlayerItem.ItemId);
+    }
+    if (defensePlayerItem != null)
+    {
+        defenseItem = Model.Items.ToList().Find(a => a.Id == defensePlayerItem.ItemId);
+    }
+    if (fuelPlayerItem != null)
+    {
+        fuelItem = Model.Items.ToList().Find(a => a.Id == fuelPlayerItem.ItemId);
+    }
+}
+
+<footer id="playerInfo">
+    <p>@Model.GameResult.Player.Name - Money:@Model.GameResult.Player.Money -  Experience:@Model.GameResult.Player.Experience</p>
+    <p>@(attackItem != null ? attackItem.Name + " [" + @attackPlayerItem.RemainingAttack + "/" + @attackItem.Attack + "]" : "[Empty]") - @(defenseItem != null ? defenseItem.Name + " [" + @defensePlayerItem.RemainingDefense + "/" + @defenseItem.Defense + "]" : "[Empty]") - @(fuelItem != null ? fuelItem.Name + " [" + @fuelPlayerItem.RemainingFuel + "/" + @fuelItem.Fuel + "]" : "[Empty]") </p>
+
+</footer>

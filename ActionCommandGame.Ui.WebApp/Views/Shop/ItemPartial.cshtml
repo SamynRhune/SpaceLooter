@@ -1,0 +1,29 @@
+﻿@using ActionCommandGame.Services.Model.Results
+@model ItemResult;
+@{
+    var klasse = "show";
+    if(Model.Defense > Model.Attack && Model.Defense > Model.Fuel)
+    {
+        klasse = "def";
+    }
+    else if (Model.Attack > Model.Defense && Model.Attack > Model.Fuel)
+    {
+        klasse = "att";
+    }
+    else if (Model.Fuel > Model.Defense && Model.Fuel > Model.Attack)
+    {
+        klasse = "fue";
+    }
+    
+}
+<div class="@klasse col-md-4">
+    <a class="shopItemLink" asp-action="Buy" asp-route-itemid="@Model.Id" asp-route-playerId="@ViewData["PlayerId"]">
+    <h3>@Model.Name    $@Model.Price</h3>
+    <p>Attack: @Model.Attack - Defense: @Model.Defense - Fuel: @Model.Fuel</p>
+    <p>@Model.Description 
+        @if(klasse=="Fue"){
+        <span>@Model.ActionCooldownSeconds</span>
+    }
+    </p>
+    </a>
+</div>

@@ -1,0 +1,31 @@
+﻿@using ActionCommandGame.Model
+@model PositiveGameEvent
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control"/>
+    <span asp-validation-for="Name"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Money" class="form-label"></label>
+    <textarea asp-for="Money" class="form-control"></textarea>
+    <span asp-validation-for="Money"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Experience" class="form-label"></label>
+    <input asp-for="Experience" class="form-control" />
+    <span asp-validation-for="Experience"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <input asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Probability" class="form-label"></label>
+    <input asp-for="Probability" class="form-control" />
+    <span asp-validation-for="Probability"></span>
+</div>
+

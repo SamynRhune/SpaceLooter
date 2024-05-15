@@ -1,0 +1,18 @@
+﻿@using ActionCommandGame.Model
+@model Item
+@{
+    ViewData["Title"] = $"Edit location {Model.Name}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <partial name="Items/CreateEditPartial" model="Model" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

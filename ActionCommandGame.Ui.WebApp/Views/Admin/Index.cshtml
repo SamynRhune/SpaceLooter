@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<a asp-controller="Home" asp-action="Index"><img id="homelogo" src="~/img/home.png" alt="homeLogo" /></a>
+<div class="text-center">
+    <h1 class="display-4">Welcome to Space Looter</h1>
+    <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="ItemIndex">Item</a>
+    <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="PlayerItemIndex">PlayerItem</a>
+    <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="PlayerIndex">Player</a>
+    <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="PositiveEventIndex">Positive Game Event</a>
+    <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="NegativeEventIndex">Negative Game Event</a>
+</div>

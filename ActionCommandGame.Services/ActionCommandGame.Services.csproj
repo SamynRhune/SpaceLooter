@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NegativeGameEventService_1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ActionCommandGame.Model\ActionCommandGame.Model.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Sdk\ActionCommandGame.Sdk.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Services.Abstractions\ActionCommandGame.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Settings\ActionCommandGame.Settings.csproj" />
+  </ItemGroup>
+
+</Project>

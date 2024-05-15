@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ActionCommandGame.Repository\ActionCommandGame.Repository.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Services.Abstractions\ActionCommandGame.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Services.Model\ActionCommandGame.Services.Model.csproj" />
+    <ProjectReference Include="..\ActionCommandGame.Settings\ActionCommandGame.Settings.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿@using ActionCommandGame.Services.Model.Results
+@model NegativeGameEventResult
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Description</td>
+    <td>@Model.DefenseWithGearDescription</td>
+    <td>@Model.DefenseWithoutGearDescription</td>
+    <td>@Model.DefenseLoss</td>
+    <td>@Model.Probability</td>
+    <td>
+        <a asp-action="NegativeEventEdit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+        <a asp-action="NegativeEventDelete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        @* <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" 
+                data-bs-toggle="modal" 
+                data-bs-target="#deleteModal"
+                data-id="@Model.Id"
+                data-role="Delete">
+            Delete with modal
+        </button> *@
+    </td>
+</tr>

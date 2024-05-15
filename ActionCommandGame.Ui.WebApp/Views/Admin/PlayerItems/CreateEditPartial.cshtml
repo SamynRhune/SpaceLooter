@@ -1,0 +1,30 @@
+﻿@using ActionCommandGame.Model
+@model PlayerItem
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="mb-3">
+    <label asp-for="PlayerId" class="form-label"></label>
+    <input asp-for="PlayerId" class="form-control"/>
+    <span asp-validation-for="PlayerId"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="ItemId" class="form-label"></label>
+    <textarea asp-for="ItemId" class="form-control"></textarea>
+    <span asp-validation-for="ItemId"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="RemainingAttack" class="form-label"></label>
+    <input asp-for="RemainingAttack" class="form-control" />
+    <span asp-validation-for="RemainingAttack"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="RemainingFuel" class="form-label"></label>
+    <input asp-for="RemainingFuel" class="form-control" />
+    <span asp-validation-for="RemainingFuel"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="RemainingDefense" class="form-label"></label>
+    <input asp-for="RemainingDefense" class="form-control" />
+    <span asp-validation-for="RemainingDefense"></span>
+</div>
