@@ -18,9 +18,15 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: #ffffff; /* Witte tekstkleur voor de hele pagina */
+    background-image: url("../img/spaceBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-
+label{
+    color:black;
+}
 #negativeGameEvent{
     background-color:orange;
     border: solid 1px red;
@@ -29,6 +35,7 @@ body {
 #positiveGameEvent {
     background-color: lightblue;
     border: solid 1px blue;
+    
 }
 
 #shoplogo{
@@ -38,7 +45,7 @@ body {
 }
 
 #accountlogo {
-    width: 100px;
+    width: 97px;
     height: auto;
     float: right;
 }
@@ -99,6 +106,49 @@ body {
     
 }
 
-#levelProgress{
-    
+#spaceship{
+    width:150px;
+    height:auto;
+}
+
+.move-left {
+    position: absolute;
+    animation: moveToLeft 2s forwards; /* Animation duration and fill mode */
+}
+
+.move-middle {
+    position: absolute;
+    animation: moveToMiddle 2s forwards; /* Animation duration and fill mode */
+}
+
+@keyframes moveToLeft {
+    from {
+        left: 40%; /* Start from the right edge of the screen */
+    }
+
+    to {
+        left: -40%; /* Move to the left edge of the screen */
+    }
+}
+
+@keyframes moveToMiddle {
+    from {
+        left: 100%; /* Start from the right edge of the screen */
+    }
+
+    to {
+        left: 40%; /* Move to the left edge of the screen */
+    }
+}
+
+.first-element {
+    margin-top: 200px;
+}
+
+.last-element{
+    margin-bottom:100px;
+}
+
+.whiteletter{
+    color: white;
 }

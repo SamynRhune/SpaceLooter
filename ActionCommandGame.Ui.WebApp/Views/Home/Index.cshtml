@@ -13,7 +13,7 @@
         <h2>Login to start your adventure</h2>
     }
 
-    
+    <br />
     
     
 
@@ -22,6 +22,8 @@
         <a class="btn btn-secondary" asp-area="" asp-controller="Game" asp-action="Index">Play</a>
         @if (User.IsInRole("Admin"))
         {
+            <br />
+            <br />
             <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
         }
         
@@ -31,12 +33,15 @@
           asp-controller="Identity"
           asp-action="LogOut"
           asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <br />
+            
             <button type="submit" class="btn btn-secondary">Logout</button>
     </form>
 
     }else{
         
         <a class="btn btn-secondary" asp-area="" asp-controller="Identity" asp-action="Register">Register</a>
+        <span> OR </span>
         <a class="btn btn-secondary" asp-area="" asp-controller="Identity" asp-action="SignIn">Log in</a>
     }
 

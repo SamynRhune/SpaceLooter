@@ -25,27 +25,7 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
         
         public async Task<IActionResult> Index()
         {
-            var token = _tokenStore.GetToken;
-            
-            var claims = User.Claims.ToList();
-            var roleClaims = User.Claims
-                .Where(c => c.Type == ClaimTypes.Role || c.Type == "role") // check both common role claim types
-                .ToList();
-
-            var isAdmin = User.Claims.Any(c =>
-                    (c.Type == ClaimTypes.Role || c.Type == "role") && c.Value == "Admin");
-            Console.WriteLine($"Is in Admin role: {isAdmin}");
-            // Controleer expliciet op de rol
-            var isAdmin2 = User.IsInRole( "Admin");
-            //User.AddIdentity(User, IdentityUserRole.Admin<> );
-
-
-            var rolelist = User.FindAll(ClaimTypes.Role).ToList();
-
-            
-
-            Console.WriteLine($"Is in Admin role: {isAdmin}");
-            
+                   
             return View();
         }
 

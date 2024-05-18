@@ -75,7 +75,7 @@ namespace ActionCommandGame.RestApi.Service
             if (elapsedSeconds < cooldownSeconds)
             {
                 var waitSeconds = Math.Ceiling(cooldownSeconds - elapsedSeconds);
-                var waitText = $"You are still a bit tired. You have to wait another {waitSeconds} seconds.";
+                var waitText = $"Your spaceship is too slow. You have to wait another {waitSeconds} seconds.";
 
                 PlayerResult playerServiceResult = await _playerService.Get(playerId);
                 return new ServiceResult<GameResult>
@@ -164,6 +164,7 @@ namespace ActionCommandGame.RestApi.Service
 
             player.Money += randomPositiveGameEvent.Money;
             player.Experience += randomPositiveGameEvent.Experience;
+            playerResult.Experience += randomPositiveGameEvent.Experience;
 
             var newLevel = playerResult.GetLevel();
 
@@ -419,7 +420,7 @@ namespace ActionCommandGame.RestApi.Service
                     return new List<ServiceMessage>{new ServiceMessage
                     {
                         Code = "NoFood",
-                        Message = "The tank of spaceship is empty you only move with the momentum you still haveb",
+                        Message = "The tank of spaceship is empty you only move with the momentum you still have.",
                         MessagePriority = MessagePriority.Warning
                     }};
                 }
@@ -523,14 +524,14 @@ namespace ActionCommandGame.RestApi.Service
                         return new List<ServiceMessage>{new ServiceMessage
                         {
                             Code = "ReloadedDefense",
-                            Message = $"Your {oldDefenseItem.Name} is starting to smell. No worries, you swiftly put on a freshly washed {newDefenseItem.Name}. Yeah!"
+                            Message = $"Your {oldDefenseItem.Name} is breaking down. No worries, you swiftly activated a new {newDefenseItem.Name}. Yeah!"
                         }};
                     }
 
                     return new List<ServiceMessage>{new ServiceMessage
                     {
                         Code = "NoAttack",
-                        Message = $"You just lost {oldDefenseItem.Name}. You continue without protection. Did I just see something move?",
+                        Message = $"You just lost {oldDefenseItem.Name}. You continue without shield. Did I just see something move?",
                         MessagePriority = MessagePriority.Warning
                     }};
                 }
@@ -562,17 +563,17 @@ namespace ActionCommandGame.RestApi.Service
 
             if (currentFuelPlayerItem == null)
             {
-                var infoText = "Playing without food is hard. You need a long time to recover. Consider buying food from the shop.";
+                var infoText = "Playing without fuel is hard. You need a long time to have the right speed. Consider buying fuel from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoFood", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
             if (currentAttackPlayerItem == null)
             {
-                var infoText = "Playing without tools is hard. You lost extra fuel. Consider buying tools from the shop.";
+                var infoText = "Playing without weapons is hard. You lost extra fuel. Consider buying weapons from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoTools", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
             if (currentDefensePlayerItem == null)
             {
-                var infoText = "Playing without gear is hard. You lost extra fuel. Consider buying gear from the shop.";
+                var infoText = "Playing without shield is hard. You lost extra fuel. Consider buying a shield from the shop.";
                 serviceMessages.Add(new ServiceMessage { Code = "NoGear", Message = infoText, MessagePriority = MessagePriority.Warning });
             }
 

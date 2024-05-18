@@ -42,9 +42,6 @@ namespace ActionCommandGame.RestApi.Security
 
             var roles = await _userManager.GetRolesAsync(user);
             
-            //hier komt foutmelding op
-            //var roles2 = await _roleManager.GetClaimsAsync(new IdentityRole(RoleConstants.Admin));
-
             var token = GenerateJwtToken(user, roles, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
 
             return new JwtAuthenticationResult
@@ -78,7 +75,7 @@ namespace ActionCommandGame.RestApi.Security
                 return JwtAuthenticationHelper.RegisterError(result.Errors);
             }
 
-            if (!await _roleManager.RoleExistsAsync(RoleConstants.Admin))
+            if (!await _roleManager.RoleExistsAsync(RoleConstants.User))
             {
                 await _roleManager.CreateAsync(new IdentityRole(RoleConstants.User));
             }
@@ -105,7 +102,7 @@ namespace ActionCommandGame.RestApi.Security
 
             await _playerService.Create(playerRequest);
 
-            var roles = new List<string> { RoleConstants.Admin };
+            var roles = new List<string> { RoleConstants.User };
             var token = GenerateJwtToken(identityUser, roles, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
 
             return new JwtAuthenticationResult

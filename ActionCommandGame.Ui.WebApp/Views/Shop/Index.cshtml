@@ -6,9 +6,9 @@
     ViewData["Title"] = "Shop";
 }
 
-<div class="text-center">
+<div class="text-center last-element">
     <div>
-        <a asp-controller="Home" asp-action="Index"><img id="homelogo" src="~/img/home.png" alt="homeLogo" /></a>
+        <a asp-controller="Home" asp-action="Index"><img id="homelogo" src="~/img/homeW.png" alt="homeLogo" /></a>
         <a asp-controller="Game" asp-action="Index"><img id="shoplogo" src="~/img/lootLogo.png" alt="lootLogo" /></a>
         <h1 class="display-4">Space Looter</h1>
         @{
@@ -16,6 +16,7 @@
             {
                 foreach (ServiceMessage serviceMessage in Model.GameResult.NegativeGameEventMessages)
                 {
+                    
                     var klasse = "SM" + @serviceMessage.MessagePriority;
 
                     <div class=@klasse>
@@ -33,12 +34,16 @@
         <div class="row">
             @foreach (var item in Model.Items)
             {
-                var viewData = new ViewDataDictionary(ViewData)
+                if (!(User.IsInRole("User") && item.Id == 19))
                 {
+                    var viewData = new ViewDataDictionary(ViewData)
+                    {
                     { "PlayerId", Model.GameResult.Player.Id }
-                };
+                    };
 
-                @Html.Partial("ItemPartial", item, viewData)
+                            @Html.Partial("ItemPartial", item, viewData)
+                        }
+                
             }
         </div>
     </div>
@@ -70,7 +75,7 @@
 }
 <footer id="playerInfo">
     <progress id="levelProgress" max="@maxProgress" value="@currentProgress"></progress>
-    <p>@Model.GameResult.Player.Name - Money:@Model.GameResult.Player.Money -  Experience:@Model.GameResult.Player.Experience</p>
+    <p>@Model.GameResult.Player.Name - Money:@Model.GameResult.Player.Money -  Level:@Model.GameResult.Player.GetLevelFromExperience()</p>
     <p>@(attackItem != null ? attackItem.Name + " [" + @attackPlayerItem.RemainingAttack + "/" + @attackItem.Attack + "]" : "[Empty]") - @(defenseItem != null ? defenseItem.Name + " [" + @defensePlayerItem.RemainingDefense + "/" + @defenseItem.Defense + "]" : "[Empty]") - @(fuelItem != null ? fuelItem.Name + " [" + @fuelPlayerItem.RemainingFuel + "/" + @fuelItem.Fuel + "]" : "[Empty]") </p>
 
 </footer>
