@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ActionCommandGame.Sdk;
 using ActionCommandGame.Services.Abstractions;
-using ActionCommandGame.Services.Extensions;
+using ActionCommandGame.Extensions;
 using ActionCommandGame.Services.Model.Core;
 using ActionCommandGame.Services.Model.Results;
 using ActionCommandGame.Settings;

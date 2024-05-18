@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ActionCommandGame.Extensions\ActionCommandGame.Extensions.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Repository\ActionCommandGame.Repository.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Services.Abstractions\ActionCommandGame.Services.Abstractions.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Services.Model\ActionCommandGame.Services.Model.csproj" />

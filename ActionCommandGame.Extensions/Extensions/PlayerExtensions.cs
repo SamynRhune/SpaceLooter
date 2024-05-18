@@ -1,8 +1,8 @@
 ﻿using ActionCommandGame.Model;
-using ActionCommandGame.Sdk.Helpers;
+using ActionCommandGame.Helpers;
 using ActionCommandGame.Services.Model.Results;
 
-namespace ActionCommandGame.Sdk.Extensions
+namespace ActionCommandGame.Extensions
 {
     public static class PlayerExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ActionCommandGame.Services.Helpers
+namespace ActionCommandGame.Helpers
 {
     public static class PlayerLevelHelper
     {

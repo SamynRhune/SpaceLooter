@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ActionCommandGame.Sdk.Helpers
+namespace ActionCommandGame.Helpers
 {
     public class Dice
     {

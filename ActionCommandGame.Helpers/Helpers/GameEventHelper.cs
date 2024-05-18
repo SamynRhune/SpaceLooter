@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ActionCommandGame.Model;
 using ActionCommandGame.Model.Abstractions;
-using ActionCommandGame.Services.Model.Requests;
-using ActionCommandGame.Services.Model.Results;
 
-namespace ActionCommandGame.Services.Helpers
+
+namespace ActionCommandGame.Helpers
 {
     /// <summary>
     /// https://stackoverflow.com/questions/25991198/game-design-theory-loot-drop-chance-spawn-rate

@@ -1,4 +1,5 @@
-using ActionCommandGame.Services.Helpers;
+using ActionCommandGame;
+using ActionCommandGame.Helpers;
 using Xunit;
 
 namespace ActionCommandGame.Tests

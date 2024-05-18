@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ActionCommandGame.Model;
 using ActionCommandGame.Repository;
-using ActionCommandGame.RestApi.Service.Extensions;
+using ActionCommandGame.Extensions;
 using ActionCommandGame.Services.Abstractions;
 
 using ActionCommandGame.Services.Model.Core;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ActionCommandGame.Services.Model.Core;
 
-namespace ActionCommandGame.Sdk.Extensions
+namespace ActionCommandGame.Extensions
 {
     public static class ServiceResultExtensions
     {

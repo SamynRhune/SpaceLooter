@@ -1,4 +1,4 @@
-﻿namespace ActionCommandGame.Services.Helpers
+﻿namespace ActionCommandGame.Helpers
 {
     public class CumulativeGameEvent<T>
     {

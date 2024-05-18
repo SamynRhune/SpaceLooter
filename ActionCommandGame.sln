@@ -29,9 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.RestApi.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.Ui.WebApp", "ActionCommandGame.Ui.WebApp\ActionCommandGame.Ui.WebApp.csproj", "{12964278-D088-4F20-815C-40A1F2A4A049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionCommandGame.RestApi.Security", "RestApi.Security\ActionCommandGame.RestApi.Security.csproj", "{C58CFB15-B9EF-4354-806A-28E3B9F0B92B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.RestApi.Security", "RestApi.Security\ActionCommandGame.RestApi.Security.csproj", "{C58CFB15-B9EF-4354-806A-28E3B9F0B92B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionCommandGame.Security.Model", "ActionCommandGame.Security.Model\ActionCommandGame.Security.Model.csproj", "{35065A50-2B3F-4615-9028-AB2F8C52B693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionCommandGame.Security.Model", "ActionCommandGame.Security.Model\ActionCommandGame.Security.Model.csproj", "{35065A50-2B3F-4615-9028-AB2F8C52B693}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionCommandGame.Extensions", "ActionCommandGame.Extensions\ActionCommandGame.Extensions.csproj", "{69CE574A-4362-4AD5-9658-3EB3B84ED520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionCommandGame.Helpers", "ActionCommandGame.Helpers\ActionCommandGame.Helpers.csproj", "{0F3A2B96-A79E-4BBF-BC2C-EAAD90A64CB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +103,14 @@ Global
 		{35065A50-2B3F-4615-9028-AB2F8C52B693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35065A50-2B3F-4615-9028-AB2F8C52B693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35065A50-2B3F-4615-9028-AB2F8C52B693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69CE574A-4362-4AD5-9658-3EB3B84ED520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69CE574A-4362-4AD5-9658-3EB3B84ED520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69CE574A-4362-4AD5-9658-3EB3B84ED520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69CE574A-4362-4AD5-9658-3EB3B84ED520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F3A2B96-A79E-4BBF-BC2C-EAAD90A64CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F3A2B96-A79E-4BBF-BC2C-EAAD90A64CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F3A2B96-A79E-4BBF-BC2C-EAAD90A64CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F3A2B96-A79E-4BBF-BC2C-EAAD90A64CB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

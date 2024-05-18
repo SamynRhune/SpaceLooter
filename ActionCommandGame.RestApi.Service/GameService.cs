@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ActionCommandGame.Model;
 using ActionCommandGame.Repository;
-using ActionCommandGame.RestApi.Service.Extensions;
+using ActionCommandGame.Extensions;
 using ActionCommandGame.Services;
-using ActionCommandGame.Services.Helpers;
+using ActionCommandGame.Helpers;
 using ActionCommandGame.Services.Model.Core;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
@@ -157,12 +157,15 @@ namespace ActionCommandGame.RestApi.Service
             //Einde NEGATIVE GAME EVENT
             //var negativeGameEvent = await _negativeGameEventSdk.GetRandomNegativeGameEvent();
 
-            var oldLevel = player.GetLevel();
+
+
+            PlayerResult playerResult = await _playerService.Get(playerId);
+            var oldLevel = playerResult.GetLevel();
 
             player.Money += randomPositiveGameEvent.Money;
             player.Experience += randomPositiveGameEvent.Experience;
 
-            var newLevel = player.GetLevel();
+            var newLevel = playerResult.GetLevel();
 
             var levelMessages = new List<ServiceMessage>();
             //Check if we leveled up
@@ -220,7 +223,7 @@ namespace ActionCommandGame.RestApi.Service
             //Save Player
             await _playerService.Update(playerId, playerRequest);
 
-            PlayerResult playerResult = await _playerService.Get(playerId);
+            playerResult = await _playerService.Get(playerId);
             PositiveGameEventResult positiveGameEventResult = await _positiveGameEventService.Get(randomPositiveGameEvent.Id);
             NegativeGameEventResult negativeGameEventResult = null;
             if (randomNegativeGameEvent != null)

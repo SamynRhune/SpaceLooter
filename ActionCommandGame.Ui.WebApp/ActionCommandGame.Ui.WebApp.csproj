@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ActionCommandGame.Extensions\ActionCommandGame.Extensions.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Model\ActionCommandGame.Model.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Repository\ActionCommandGame.Repository.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Sdk\ActionCommandGame.Sdk.csproj" />
