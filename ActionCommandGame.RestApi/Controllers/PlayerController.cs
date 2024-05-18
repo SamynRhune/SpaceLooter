@@ -60,18 +60,6 @@ namespace ActionCommandGame.RestApi.Controllers
             return Ok();
         }
 
-        [HttpGet("account/{id:int}")]
-        public async Task<IActionResult> GetAccount(int id)
-        {
-            var result = await _playerService.GetAccount(id);
-            return Ok(result);
-        }
-
-        [HttpPut("account/{id:int}")]
-        public async Task<IActionResult> UpdateAccount(int id, AccountRequest account)
-        {
-            var result = await _playerService.UpdateAccount(id, account);
-            return Ok(result);
-        }
+        
     }
 }

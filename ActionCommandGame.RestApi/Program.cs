@@ -77,6 +77,7 @@ builder.Services.AddScoped<PositiveGameEventService>();
 builder.Services.AddScoped<GameService>();
 builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<UserRoleService>();
+builder.Services.AddScoped<AccountService>();
 
 
 
