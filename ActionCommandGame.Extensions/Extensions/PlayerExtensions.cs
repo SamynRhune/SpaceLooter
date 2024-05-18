@@ -25,5 +25,10 @@ namespace ActionCommandGame.Extensions
         {
             return PlayerLevelHelper.GetRemainingExperienceUntilNextLevel(result.Experience);
         }
+
+        public static int GetExperienceFromCurrentLevel(this PlayerResult result)
+        {
+            return PlayerLevelHelper.GetExperienceFromLevel(result.GetLevel());
+        }
     }
 }

@@ -8,6 +8,7 @@ using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using Microsoft.AspNetCore.Identity;
+using ActionCommandGame.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ActionCommandGame.Services
@@ -42,8 +43,11 @@ namespace ActionCommandGame.Services
                 CurrentAttackPlayerItemId = player.CurrentAttackPlayerItemId,
                 CurrentDefensePlayerItemId = player.CurrentDefensePlayerItemId,
                 CurrentFuelPlayerItemId = player.CurrentFuelPlayerItemId,
-                IdentityPlayerId = player.IdentityPlayerId
+                IdentityPlayerId = player.IdentityPlayerId, 
+                
             };
+
+            
 
             return playerResult;
         }

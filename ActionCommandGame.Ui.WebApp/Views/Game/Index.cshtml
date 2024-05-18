@@ -1,5 +1,6 @@
 ﻿@using ActionCommandGame.Services.Model.Core
 @using ActionCommandGame.Services.Model.Results
+@using ActionCommandGame.Extensions;
 @model GameOverview;
 @{
     ViewData["Title"] = "Home Page";
@@ -61,7 +62,7 @@
 
     }
     @{
-        
+
         var attackPlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentAttackPlayerItemId);
         var defensePlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentDefensePlayerItemId);
         var fuelPlayerItem = Model.PlayerItems.ToList().Find(a => a.Id == Model.GameResult.Player.CurrentFuelPlayerItemId);
@@ -80,12 +81,18 @@
         {
             fuelItem = Model.Items.ToList().Find(a => a.Id == fuelPlayerItem.ItemId);
         }
-        
+
 
     }
-    
+
+    @{
+        var maxProgress = Model.GameResult.Player.GetExperienceForNextLevel() - Model.GameResult.Player.GetExperienceFromCurrentLevel();
+        var currentProgress = Model.GameResult.Player.Experience - Model.GameResult.Player.GetExperienceFromCurrentLevel();
+    }
     <footer id="playerInfo">
-        <p>@Model.GameResult.Player.Name - Money:@Model.GameResult.Player.Money -  Experience:@Model.GameResult.Player.Experience</p>
+        
+        <progress id="levelProgress" max="@maxProgress" value="@currentProgress"></progress>
+        <p>@Model.GameResult.Player.Name - Money:@Model.GameResult.Player.Money -  Level:@Model.GameResult.Player.GetLevelFromExperience()</p>
         <p>@(attackItem != null ? attackItem.Name + " [" + @attackPlayerItem.RemainingAttack + "/" + @attackItem.Attack + "]" : "[Empty]") - @(defenseItem != null ? defenseItem.Name + " [" + @defensePlayerItem.RemainingDefense + "/" + @defenseItem.Defense + "]" : "[Empty]") - @(fuelItem != null ? fuelItem.Name + " [" + @fuelPlayerItem.RemainingFuel + "/" + @fuelItem.Fuel + "]" : "[Empty]") </p>
 
     </footer>
