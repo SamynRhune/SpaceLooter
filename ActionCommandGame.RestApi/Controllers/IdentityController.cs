@@ -31,10 +31,10 @@ namespace ActionCommandGame.RestApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetIdentityUserFromName")]
-        public async Task<IActionResult> GetIdentityUserFromName(string userName)
+        [HttpGet("GetIdentityUserFromId")]
+        public async Task<IActionResult> GetIdentityUserFromId(string userId)
         {
-            var result = await _identityService.GetIdentityUserFromName(userName);
+            var result = await _identityService.GetIdentityUserFromId(userId);
             return Ok(result);
         }
     }

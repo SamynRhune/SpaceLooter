@@ -114,9 +114,9 @@ namespace ActionCommandGame.RestApi.Security
             };
         }
 
-        public async Task<IdentityUser> GetIdentityUserFromName(string userName)
+        public async Task<IdentityUser> GetIdentityUserFromId(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userName);
+            var user = await _userManager.FindByIdAsync(userId);
             return user;
         }
 

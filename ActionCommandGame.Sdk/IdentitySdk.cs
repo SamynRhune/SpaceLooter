@@ -112,11 +112,11 @@ namespace ActionCommandGame.Sdk
             return result;
         }
 
-        public async Task<IdentityUser> GetIdentityUserFromName(string userName)
+        public async Task<IdentityUser> GetIdentityUserFromId(string userId)
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandGameApi");
             
-            var route = $"/api/Identity/GetIdentityUserFromName?userName={userName}";
+            var route = $"/api/Identity/GetIdentityUserFromName?userId={userId}";
 
             var response = await httpClient.GetAsync(route);
 

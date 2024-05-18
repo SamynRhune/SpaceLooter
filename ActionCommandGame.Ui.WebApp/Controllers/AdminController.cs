@@ -260,7 +260,7 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
             }
             
 
-            var identity = await _identitySdk.GetIdentityUserFromName(player.IdentityPlayerId);
+            var identity = await _identitySdk.GetIdentityUserFromId(player.IdentityPlayerId);
             if (identity == null)
             {
                 return null;
@@ -285,7 +285,7 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> SetUserRole(string userId, string roleName, int playerId)
         {
-            var user = await _identitySdk.GetIdentityUserFromName(userId);
+            var user = await _identitySdk.GetIdentityUserFromId(userId);
             if(user == null)
             {
                 return null;
