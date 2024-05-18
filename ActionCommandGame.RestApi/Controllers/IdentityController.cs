@@ -1,5 +1,6 @@
 ﻿using ActionCommandGame.RestApi.Security;
 using ActionCommandGame.Services.Model.Requests;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -27,6 +28,13 @@ namespace ActionCommandGame.RestApi.Controllers
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
             var result = await _identityService.Register(request);
+            return Ok(result);
+        }
+
+        [HttpGet("GetIdentityUserFromName")]
+        public async Task<IActionResult> GetIdentityUserFromName(string userName)
+        {
+            var result = await _identityService.GetIdentityUserFromName(userName);
             return Ok(result);
         }
     }

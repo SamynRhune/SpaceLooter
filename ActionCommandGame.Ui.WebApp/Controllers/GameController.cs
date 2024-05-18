@@ -37,9 +37,14 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
         public async Task<IActionResult> Index(string? serviceResultJson)
         {
 
-            
+            var userId = User.Claims.Where(c => c.Type == "Id").FirstOrDefault().Value;
+
+            if (userId == null)
+            {
+                return null;
+            }
             /*int playerId = _id;*/
-            var currentPlayer = await _playerSdk.GetIdentityId(User.Identity.Name);
+            var currentPlayer = await _playerSdk.GetIdentityId(userId);
             /*  Player player = new Player
               {
                   Id = playerId,

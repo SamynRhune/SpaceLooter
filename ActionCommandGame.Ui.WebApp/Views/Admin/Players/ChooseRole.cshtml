@@ -1,0 +1,12 @@
+﻿
+@using ActionCommandGame.Ui.WebApp.Models;
+@model IdentityUserRoleView
+@{
+    ViewData["Title"] = "Choose Role";
+}
+<a asp-controller="Admin" asp-action="Index"><img id="homelogo" src="~/img/home.png" alt="homeLogo" /></a>
+<h1>@ViewData["Title"]</h1>
+<p>Current User: @Model.User.UserName</p>
+<p>Current Role: @Model.Role.Name</p>
+<a asp-action="SetUserRole" asp-route-userId="@Model.User.Id" asp-route-playerId="@Model.Player.Id" asp-route-roleName="User" class="btn btn-secondary">User</a>
+<a asp-action="SetUserRole" asp-route-userId="@Model.User.Id" asp-route-playerId="@Model.Player.Id" asp-route-roleName="Admin" class="btn btn-secondary">Admin</a>

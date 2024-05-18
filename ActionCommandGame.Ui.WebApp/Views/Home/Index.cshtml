@@ -20,7 +20,11 @@
     @if (User.Identity is not null && User.Identity.IsAuthenticated)
     {
         <a class="btn btn-secondary" asp-area="" asp-controller="Game" asp-action="Index">Play</a>
-        <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-secondary" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+        }
+        
        
         <form class="form-inline"
         asp-area=""

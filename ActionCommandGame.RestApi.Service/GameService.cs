@@ -214,6 +214,7 @@ namespace ActionCommandGame.RestApi.Service
                 CurrentAttackPlayerItemId = player.CurrentAttackPlayerItemId,
                 CurrentDefensePlayerItemId = player.CurrentDefensePlayerItemId,
                 CurrentFuelPlayerItemId = player.CurrentFuelPlayerItemId,
+                IdentityPlayerId = player.IdentityPlayerId,
             };
 
             //Save Player
@@ -306,6 +307,7 @@ namespace ActionCommandGame.RestApi.Service
                 CurrentAttackPlayerItemId = player.CurrentAttackPlayerItemId,
                 CurrentDefensePlayerItemId = player.CurrentDefensePlayerItemId,
                 CurrentFuelPlayerItemId = player.CurrentFuelPlayerItemId,
+                IdentityPlayerId = player.IdentityPlayerId,
             };
             // update player
             await _playerService.Update(playerId, playerRequest);
@@ -321,7 +323,8 @@ namespace ActionCommandGame.RestApi.Service
                 LastActionExecutedDateTime = player.LastActionExecutedDateTime,
                 CurrentFuelPlayerItemId = player.CurrentFuelPlayerItemId,
                 CurrentAttackPlayerItemId = player.CurrentAttackPlayerItemId,
-                CurrentDefensePlayerItemId = player.CurrentDefensePlayerItemId
+                CurrentDefensePlayerItemId = player.CurrentDefensePlayerItemId,
+                IdentityPlayerId = player.IdentityPlayerId,
             };
             Item buyItem = new Item
             {
@@ -369,7 +372,8 @@ namespace ActionCommandGame.RestApi.Service
                 CurrentAttackPlayerItemId = player.CurrentAttackPlayerItemId,
                 CurrentDefensePlayerItemId = player.CurrentDefensePlayerItemId,
                 CurrentFuelPlayerItemId = player.CurrentFuelPlayerItemId,
-                LastActionExecutedDateTime = player.LastActionExecutedDateTime
+                LastActionExecutedDateTime = player.LastActionExecutedDateTime,
+                IdentityPlayerId = player.IdentityPlayerId,
             };
 
             await _playerService.Update(playerId, playerRequest);

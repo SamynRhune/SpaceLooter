@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ActionCommandGame.RestApi.Security.Helpers;
@@ -79,10 +80,10 @@ namespace ActionCommandGame.RestApi.Security
 
             if (!await _roleManager.RoleExistsAsync(RoleConstants.Admin))
             {
-                await _roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+                await _roleManager.CreateAsync(new IdentityRole(RoleConstants.User));
             }
-            if(!await _userManager.IsInRoleAsync(identityUser, RoleConstants.Admin)){
-                var roleResult = await _userManager.AddToRoleAsync(identityUser, RoleConstants.Admin);
+            if(!await _userManager.IsInRoleAsync(identityUser, RoleConstants.User)){
+                var roleResult = await _userManager.AddToRoleAsync(identityUser, RoleConstants.User);
                 if (!roleResult.Succeeded)
                 {
                     return JwtAuthenticationHelper.JwtConfigurationError();
@@ -113,7 +114,33 @@ namespace ActionCommandGame.RestApi.Security
             };
         }
 
-        private string GenerateJwtToken(IdentityUser user, IEnumerable<string> roles, string secret, TimeSpan expiry)
+        public async Task<IdentityUser> GetIdentityUserFromName(string userName)
+        {
+            var user = await _userManager.FindByIdAsync(userName);
+            return user;
+        }
+
+        public async Task<JwtAuthenticationResult> SetUserAsUser(string userName)
+        {
+            if (string.IsNullOrWhiteSpace(_jwtSettings.Secret) || !_jwtSettings.Expiry.HasValue)
+            {
+                return JwtAuthenticationHelper.JwtConfigurationError();
+            }
+            var user = await _userManager.FindByIdAsync(userName);
+            if (user == null)
+            {
+                return JwtAuthenticationHelper.JwtConfigurationError();
+            }
+            var roles = new List<string> { RoleConstants.User };
+            var token = GenerateJwtToken(user, roles, _jwtSettings.Secret, _jwtSettings.Expiry.Value);
+
+            return new JwtAuthenticationResult
+            {
+                Token = token
+            };
+        }
+
+        public string GenerateJwtToken(IdentityUser user, IEnumerable<string> roles, string secret, TimeSpan expiry)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);

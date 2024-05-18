@@ -7,6 +7,7 @@ using ActionCommandGame.Repository;
 using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ActionCommandGame.Services
@@ -51,7 +52,7 @@ namespace ActionCommandGame.Services
         {
             //apart omdat entity er moeite mee heeft
             var player = await _database.Players
-         .SingleOrDefaultAsync(p => p.Name.Equals(id));
+         .SingleOrDefaultAsync(p => p.IdentityPlayerId.Equals(id));
 
             if (player == null)
             {
@@ -99,7 +100,7 @@ namespace ActionCommandGame.Services
                 Name = request.Name,
                 Money = request.Money,
                 Experience = request.Experience,
-                LastActionExecutedDateTime = request.LastActionExecutedDateTime,
+                LastActionExecutedDateTime = DateTime.Now.AddDays(-1),
                 CurrentAttackPlayerItemId = request.CurrentAttackPlayerItemId,
                 CurrentDefensePlayerItemId = request.CurrentDefensePlayerItemId,
                 CurrentFuelPlayerItemId = request.CurrentFuelPlayerItemId,
@@ -149,6 +150,67 @@ namespace ActionCommandGame.Services
 
             await _database.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<AccountResult> GetAccount(int id)
+        {
+            //apart omdat entity er moeite mee heeft
+            var player = await _database.Players
+         .SingleOrDefaultAsync(p => p.Id == id);
+
+            if (player == null)
+            {
+                return null;
+            }
+            var account = await _database.AspNetUsers.SingleOrDefaultAsync(a => a.Id.Equals(player.IdentityPlayerId));
+            if (account == null)
+            {
+                return null;
+            }
+
+            AccountResult result = new AccountResult
+            {
+                Email = account.Email,
+                UserName = account.UserName,
+                PhoneNumber = account.PhoneNumber
+            };
+
+            
+            return result;
+        }
+
+        public async Task<AccountResult> UpdateAccount(int id, AccountRequest request)
+        {
+            var db_player = await _database.Players.Where(pi => pi.Id == id).FirstOrDefaultAsync();
+
+            if (db_player is null)
+            {
+                return null;
+            }
+
+            var account = await _database.AspNetUsers.SingleOrDefaultAsync(a => a.Id.Equals(db_player.IdentityPlayerId));
+            if (account == null)
+            {
+                return null;
+            }
+
+            /*AccountResult result = new AccountResult
+            {
+                Email = account.Email,
+                UserName = account.UserName,
+                PhoneNumber = account.PhoneNumber
+            };*/
+
+            account.UserName = request.UserName;
+            account.Email = request.Email;
+            account.PhoneNumber = request.PhoneNumber;
+            await _database.SaveChangesAsync();
+
+            db_player.Name = request.UserName;
+
+            await _database.SaveChangesAsync();
+
+            return await GetAccount(id);
         }
     }
 }

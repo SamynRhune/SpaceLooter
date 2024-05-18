@@ -2,6 +2,7 @@
 using ActionCommandGame.Sdk;
 using ActionCommandGame.Security.Model;
 using ActionCommandGame.Services.Model.Requests;
+using ActionCommandGame.Ui.WebApp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,19 +19,22 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
         private readonly PlayerSdk _playerSdk;
         private readonly PositiveGameEventSdk _positiveGameEventSdk;
         private readonly NegativeGameEventSdk _negativeGameEventSdk;
+        private readonly IdentitySdk _identitySdk; 
+        private readonly UserRoleSdk _userRoleSdk;
 
 
-        
-        public AdminController(ItemSdk itemSdk, PlayerItemSdk playerItemSdk, PlayerSdk playerSdk, PositiveGameEventSdk positiveGameEventSdk, NegativeGameEventSdk negativeGameEventSdk)
+        public AdminController(ItemSdk itemSdk, PlayerItemSdk playerItemSdk, PlayerSdk playerSdk, PositiveGameEventSdk positiveGameEventSdk, NegativeGameEventSdk negativeGameEventSdk, IdentitySdk identitySdk, UserRoleSdk userRoleSdk)
         {
             _itemSdk = itemSdk;
             _playerItemSdk = playerItemSdk;
             _playerSdk = playerSdk;
             _positiveGameEventSdk = positiveGameEventSdk;
             _negativeGameEventSdk = negativeGameEventSdk;
+            _identitySdk = identitySdk;
+            _userRoleSdk = userRoleSdk;
         }
 
-        
+
         public IActionResult Index()
         {            
             return View();
@@ -245,6 +249,55 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
             await _playerSdk.Update(id, editPlayer);
             return RedirectToAction("PlayerIndex");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ChooseRole(int playerId)
+        {
+            var player = await _playerSdk.Get(playerId);
+            if(player == null)
+            {
+                return null;
+            }
+            
+
+            var identity = await _identitySdk.GetIdentityUserFromName(player.IdentityPlayerId);
+            if (identity == null)
+            {
+                return null;
+            }
+            var role = await _userRoleSdk.GetRoleFromUser(identity.Id);
+            if(role == null)
+            {
+                return null;
+            }
+
+            
+            
+            IdentityUserRoleView identityUserRoleView = new IdentityUserRoleView
+            {
+                Player = player,
+                User = identity,
+                Role = role
+            };
+            return View("Players/ChooseRole",identityUserRoleView);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SetUserRole(string userId, string roleName, int playerId)
+        {
+            var user = await _identitySdk.GetIdentityUserFromName(userId);
+            if(user == null)
+            {
+                return null;
+            }
+            
+            await _userRoleSdk.SetRoleFromUser(user.Id, roleName);
+
+
+            return RedirectToAction("ChooseRole", new { playerId });
+        }
+
+        
 
         public async Task<IActionResult> PositiveEventIndex()
         {

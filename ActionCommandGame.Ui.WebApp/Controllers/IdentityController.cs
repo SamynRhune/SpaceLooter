@@ -7,6 +7,8 @@ using ActionCommandGame.Security.Model.Abstractions;
 using ActionCommandGame.Sdk;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Ui.WebApp.Models;
+using ActionCommandGame.Security.Model;
+using Microsoft.AspNetCore.Identity;
 
 
 
@@ -53,6 +55,7 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
 
             tokenStore.SaveToken(result.Token);
             var principal = CreatePrincipalFromToken(result.Token);
+            var claims = principal.Claims.ToList();
             await HttpContext.SignInAsync(principal);
 
             return LocalRedirect(returnUrl);
@@ -140,7 +143,37 @@ namespace ActionCommandGame.Ui.Mvc.Controllers
                 claims.Add(new Claim(ClaimTypes.Name, usernameClaim.Value));
             }
 
+            var roleClaim = token.Claims.SingleOrDefault(c => c.Type == "role");
+            if (roleClaim is not null)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, roleClaim.Value));
+            }
+
+
+
             return new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         }
+
+        public async Task<IActionResult> SetUserAsUser(string username)
+        {
+            var returnUrl =  "/";
+            var result = await identitySdk.SetUserAsUser(username);
+            tokenStore.SaveToken(result.Token);
+            var principal = CreatePrincipalFromToken(result.Token);
+            await HttpContext.SignInAsync(principal);
+            return LocalRedirect(returnUrl);
+        }
+
+        public async Task<IActionResult> SetUserAsAdmin(string username)
+        {
+            var returnUrl = "/";
+            var result = await identitySdk.SetUserAsAdmin(username);
+            tokenStore.SaveToken(result.Token);
+            var principal = CreatePrincipalFromToken(result.Token);
+            await HttpContext.SignInAsync(principal);
+            return LocalRedirect(returnUrl);
+        }
+
+        
     }
 }

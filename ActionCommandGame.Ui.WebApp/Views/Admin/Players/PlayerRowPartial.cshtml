@@ -10,6 +10,7 @@
     <td>@Model.CurrentAttackPlayerItemId</td>
     <td>@Model.CurrentDefensePlayerItemId</td>
     <td>
+        <a asp-action="ChooseRole" asp-route-playerId="@Model.Id" class="btn btn-secondary">Change Role</a>
         <a asp-action="PlayerEdit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
         <a asp-action="PlayerDelete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
         @* <!-- Button trigger modal -->

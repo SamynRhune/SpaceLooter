@@ -37,6 +37,12 @@ body {
     float:right;
 }
 
+#accountlogo {
+    width: 100px;
+    height: auto;
+    float: right;
+}
+
 .SMInfo {
     background-color: lightgreen;
     border: solid 1px black;
