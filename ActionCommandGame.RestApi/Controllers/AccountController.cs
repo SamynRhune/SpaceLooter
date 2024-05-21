@@ -29,5 +29,12 @@ namespace ActionCommandGame.RestApi.Controllers
             var result = await _accountService.UpdateAccount(id, account);
             return Ok(result);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string userId)
+        {
+            var result = await _accountService.Delete(userId);
+            return Ok(result);
+        }
     }
 }

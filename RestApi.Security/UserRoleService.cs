@@ -1,5 +1,7 @@
 ﻿using ActionCommandGame.Repository;
+using ActionCommandGame.Services.Model.Results;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,26 @@ namespace ActionCommandGame.RestApi.Security
         public UserRoleService(ActionButtonGameDbContext database)
         {
             _database = database;
+        }
+
+        public async Task<List<IdentityUserRole<string>>> Find()
+        {
+            return await _database.AspNetUserRoles.ToListAsync();
+        }
+
+        public async Task<bool> Delete(string userId, string roleId)
+        {
+            var userrole = _database.AspNetUserRoles.Where(a => a.UserId.Equals(userId) && a.RoleId.Equals(roleId)).FirstOrDefault();
+
+            if (userrole is null)
+            {
+                return false;
+            }
+
+            _database.AspNetUserRoles.Remove(userrole);
+
+            await _database.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IdentityRole> GetRoleFromUser(string userId)

@@ -21,6 +21,22 @@ namespace ActionCommandGame.RestApi.Service
             _database = database;
         }
 
+        public async Task<bool> Delete(string id)
+        {
+            var user = await _database.AspNetUsers
+               .FirstOrDefaultAsync(a => a.Id.Equals(id));
+
+            if (user is null)
+            {
+                return false;
+            }
+
+            _database.AspNetUsers.Remove(user);
+
+            await _database.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<AccountResult> GetAccount(int id)
         {
             //apart omdat entity er moeite mee heeft

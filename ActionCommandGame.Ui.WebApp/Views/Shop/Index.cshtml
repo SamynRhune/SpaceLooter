@@ -9,6 +9,7 @@
 <div class="text-center last-element">
     <div>
         <a asp-controller="Home" asp-action="Index"><img id="homelogo" src="~/img/homeW.png" alt="homeLogo" /></a>
+        <a asp-controller="Account" asp-action="UpdateAccount" asp-route-playerId="@Model.GameResult.Player.Id"><img id="accountlogo" src="~/img/accountLogo2.png" alt="accountlogo" /></a>
         <a asp-controller="Game" asp-action="Index"><img id="shoplogo" src="~/img/lootLogo.png" alt="lootLogo" /></a>
         <h1 class="display-4">Space Looter</h1>
         @{

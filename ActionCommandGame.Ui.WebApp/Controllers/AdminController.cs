@@ -21,9 +21,10 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
         private readonly NegativeGameEventSdk _negativeGameEventSdk;
         private readonly IdentitySdk _identitySdk; 
         private readonly UserRoleSdk _userRoleSdk;
+        private readonly AccountSdk _accountSdk;
 
 
-        public AdminController(ItemSdk itemSdk, PlayerItemSdk playerItemSdk, PlayerSdk playerSdk, PositiveGameEventSdk positiveGameEventSdk, NegativeGameEventSdk negativeGameEventSdk, IdentitySdk identitySdk, UserRoleSdk userRoleSdk)
+        public AdminController(ItemSdk itemSdk, PlayerItemSdk playerItemSdk, PlayerSdk playerSdk, PositiveGameEventSdk positiveGameEventSdk, NegativeGameEventSdk negativeGameEventSdk, IdentitySdk identitySdk, UserRoleSdk userRoleSdk, AccountSdk accountSdk)
         {
             _itemSdk = itemSdk;
             _playerItemSdk = playerItemSdk;
@@ -32,6 +33,7 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
             _negativeGameEventSdk = negativeGameEventSdk;
             _identitySdk = identitySdk;
             _userRoleSdk = userRoleSdk;
+            _accountSdk = accountSdk;
         }
 
 
@@ -210,6 +212,41 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
 
         public async Task<IActionResult> PlayerDelete(int id)
         {
+            string currentUserId = User.Claims.Where(p => p.Type.Equals("Id")).FirstOrDefault().Value;
+            if(currentUserId == null)
+            {
+                return RedirectToAction("PlayerIndex");
+            }
+            var player = await _playerSdk.Get(id);
+            if(player == null)
+            {
+                return RedirectToAction("PlayerIndex");
+            }
+            if(player.IdentityPlayerId == currentUserId)
+            {
+                return RedirectToAction("PlayerIndex");
+            }
+
+            var allplayerItems = await _playerItemSdk.Find();
+
+            foreach(var playerItem in allplayerItems)
+            {
+                if(playerItem.PlayerId == id)
+                {
+                    await _playerItemSdk.Delete(playerItem.Id);
+                }
+            }
+
+            var allUserRoles = await _userRoleSdk.Find();
+            foreach(var userrole in allUserRoles)
+            {
+                if(userrole.UserId.Equals(player.IdentityPlayerId))
+                {
+                    await _userRoleSdk.Delete(userrole.UserId, userrole.RoleId);
+                }
+            }
+
+            await _accountSdk.Delete(player.IdentityPlayerId);
             await _playerSdk.Delete(id);
             return RedirectToAction("PlayerIndex");
         }

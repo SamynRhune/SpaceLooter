@@ -7,26 +7,25 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private PlayerSdk _playerSdk;
-        private IdentitySdk _identitySdk;
-        public AccountController(PlayerSdk playerSdk, IdentitySdk identitySdk) { 
-            _playerSdk = playerSdk;
-            _identitySdk = identitySdk;
+        private AccountSdk _accountSdk;
+        public AccountController(AccountSdk accountSdk) { 
+            _accountSdk = accountSdk;
         }
         [HttpGet]
         public async Task<IActionResult> UpdateAccount(int playerId)
         {
-            var account = await _playerSdk.GetAccount(playerId);
+            var account = await _accountSdk.GetAccount(playerId);
             return View(account);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateAccount(int playerId, AccountRequest request)
         {
-            var account = await _playerSdk.UpdateAccount(playerId, request);
+            var account = await _accountSdk.UpdateAccount(playerId, request);
             return View(account);
         }
 
+        
         
     }
 }

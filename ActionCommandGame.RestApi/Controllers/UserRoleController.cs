@@ -15,6 +15,13 @@ namespace ActionCommandGame.RestApi.Controllers
             _userRoleService = roleService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Find()
+        {
+            var result = await _userRoleService.Find();
+            return Ok(result);
+        }
+
         [HttpGet("GetRoleFromUser")]
         public async Task<IActionResult> GetRoleFromUser(string userId)
         {
@@ -26,6 +33,13 @@ namespace ActionCommandGame.RestApi.Controllers
         public async Task<IActionResult> SetRoleFromUser(string userId, string roleName)
         {
             var result = await _userRoleService.SetRoleFromUser(userId,roleName);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string userId, string roleId)
+        {
+            var result = await _userRoleService.Delete(userId,roleId);
             return Ok(result);
         }
     }

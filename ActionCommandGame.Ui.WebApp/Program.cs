@@ -47,6 +47,7 @@ builder.Services.AddScoped<PlayerSdk>();
 builder.Services.AddScoped<IdentitySdk>();
 builder.Services.AddScoped<UserRoleSdk>();
 builder.Services.AddScoped<AppSettings>();
+builder.Services.AddScoped<AccountSdk>();
 
 builder.Services.AddScoped<ITokenStore, TokenStore>();
 

@@ -116,7 +116,7 @@ namespace ActionCommandGame.Sdk
         {
             var httpClient = _httpClientFactory.CreateClient("ActionCommandGameApi");
             
-            var route = $"/api/Identity/GetIdentityUserFromName?userId={userId}";
+            var route = $"/api/Identity/GetIdentityUserFromId?userId={userId}";
 
             var response = await httpClient.GetAsync(route);
 
