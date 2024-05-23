@@ -1,12 +1,8 @@
-using ActionCommandGame.Security.Model;
 using ActionCommandGame.Security.Model.Abstractions;
 using ActionCommandGame.Ui.WebApp.Models;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
-using System.Security.Claims;
+
 
 namespace ActionCommandGame.Ui.WebApp.Controllers
 {

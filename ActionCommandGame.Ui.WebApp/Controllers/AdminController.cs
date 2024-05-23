@@ -1,13 +1,10 @@
 ﻿using ActionCommandGame.Model;
 using ActionCommandGame.Sdk;
-using ActionCommandGame.Security.Model;
 using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Ui.WebApp.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+
 
 namespace ActionCommandGame.Ui.WebApp.Controllers
 {

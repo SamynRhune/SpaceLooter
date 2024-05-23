@@ -1,11 +1,4 @@
-﻿
-using ActionCommandGame.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace ActionCommandGame.Services.Model.Requests
+﻿namespace ActionCommandGame.Services.Model.Requests
 {
     public class AccountRequest
     {

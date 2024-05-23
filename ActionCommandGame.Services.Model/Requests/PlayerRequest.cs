@@ -1,9 +1,5 @@
-﻿
-using ActionCommandGame.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace ActionCommandGame.Services.Model.Requests
 {

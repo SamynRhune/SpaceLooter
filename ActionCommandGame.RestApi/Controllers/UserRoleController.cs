@@ -1,6 +1,4 @@
 ﻿using ActionCommandGame.RestApi.Security;
-using ActionCommandGame.Services.Model.Requests;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.RestApi.Controllers

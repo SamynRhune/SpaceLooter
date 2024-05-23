@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ActionCommandGame.Services.Model.Core;
+﻿using ActionCommandGame.Services.Model.Core;
 
 namespace ActionCommandGame.Extensions
 {

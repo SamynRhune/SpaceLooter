@@ -50,6 +50,10 @@ label{
     float: right;
 }
 
+#denied{
+    text-align:center;
+}
+
 .SMInfo {
     background-color: lightgreen;
     border: solid 1px black;

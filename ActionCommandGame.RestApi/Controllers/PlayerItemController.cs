@@ -1,8 +1,5 @@
-﻿using ActionCommandGame.Model;
-using ActionCommandGame.Security.Model;
-using ActionCommandGame.Services;
+﻿using ActionCommandGame.Services;
 using ActionCommandGame.Services.Model.Requests;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.RestApi.Controllers

@@ -1,5 +1,4 @@
-﻿using ActionCommandGame.Model;
-using ActionCommandGame.Helpers;
+﻿using ActionCommandGame.Helpers;
 using ActionCommandGame.Services.Model.Results;
 
 namespace ActionCommandGame.Extensions

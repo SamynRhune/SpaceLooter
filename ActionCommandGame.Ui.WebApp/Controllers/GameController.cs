@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ActionCommandGame.Model;
 using ActionCommandGame.Sdk;
 using ActionCommandGame.Services.Model.Results;
 using ActionCommandGame.Ui.WebApp.Models;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using ActionCommandGame.Services.Model.Core;
 
 namespace ActionCommandGame.Ui.WebApp.Controllers

@@ -1,10 +1,8 @@
 ﻿using ActionCommandGame.Model;
-using ActionCommandGame.Repository.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace ActionCommandGame.Repository
 {

@@ -1,6 +1,4 @@
-﻿using ActionCommandGame.Model;
-using ActionCommandGame.Services;
-using ActionCommandGame.Services.Abstractions;
+﻿using ActionCommandGame.Services;
 using ActionCommandGame.Services.Model.Requests;
 using Microsoft.AspNetCore.Mvc;
 

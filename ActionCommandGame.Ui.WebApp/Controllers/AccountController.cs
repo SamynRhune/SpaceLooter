@@ -1,6 +1,5 @@
 ﻿using ActionCommandGame.Sdk;
 using ActionCommandGame.Services.Model.Requests;
-using ActionCommandGame.Services.Model.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ActionCommandGame.Ui.WebApp.Controllers
@@ -25,6 +24,10 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
             return View(account);
         }
 
+        public async Task<IActionResult> AccessDenied()
+        {
+            return View();
+        }
         
         
     }

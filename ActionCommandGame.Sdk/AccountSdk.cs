@@ -1,12 +1,6 @@
 ﻿using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ActionCommandGame.Sdk
 {
     public class AccountSdk

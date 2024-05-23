@@ -1,18 +1,10 @@
 using ActionCommandGame.Sdk;
-using ActionCommandGame.Services;
-
 using ActionCommandGame.Settings;
 using ActionCommandGame.Ui.WebApp.Settings;
-using Microsoft.Extensions.Configuration;
-using ActionCommandGame.Settings;
 using ActionCommandGame.Security.Model.Abstractions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ActionCommandGame.Ui.Mvc.Stores;
-using Microsoft.AspNetCore.Identity;
-using ActionCommandGame.Security.Model;
-using Microsoft.IdentityModel.Tokens;
-using ActionCommandGame.Repository;
-using Microsoft.EntityFrameworkCore;
+
 
 
 
@@ -58,38 +50,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.LoginPath = "/Identity/SignIn";
 });
 
-
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.ClaimsIdentity.RoleClaimType = "Admin";
-});
-
-
-
-/*builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminController", policy =>
-    {
-        policy.RequireRole("Admin");
-    });
-});*/
-
-
-builder.Services.AddAuthorization(options =>
-            options.AddPolicy("Admin",
-                policy => policy.RequireClaim("Admin")));
-
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-    options.CheckConsentNeeded = context => true;
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-});
-
-
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -104,7 +64,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCookiePolicy();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

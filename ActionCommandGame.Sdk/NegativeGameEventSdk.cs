@@ -1,5 +1,4 @@
-﻿using ActionCommandGame.Services.Model;
-using ActionCommandGame.Services.Model.Requests;
+﻿using ActionCommandGame.Services.Model.Requests;
 using ActionCommandGame.Services.Model.Results;
 using System.Net;
 using System.Net.Http.Json;

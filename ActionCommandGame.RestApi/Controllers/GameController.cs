@@ -1,13 +1,9 @@
-﻿using ActionCommandGame.Services.Model.Requests;
-using ActionCommandGame.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ActionCommandGame.RestApi.Service;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using ActionCommandGame.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ActionCommandGame.RestApi.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
     public class GameController : ControllerBase

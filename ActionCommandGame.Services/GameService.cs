@@ -1,11 +1,9 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ActionCommandGame.Model;
-
 using ActionCommandGame.Sdk;
-
 using ActionCommandGame.Services.Abstractions;
 using ActionCommandGame.Extensions;
 using ActionCommandGame.Services.Model.Core;
@@ -68,7 +66,7 @@ namespace ActionCommandGame.Services
             }
 
             var hasAttackItem = false;
-            /*ItemResult attackItemResult = await ;*/
+            *//*ItemResult attackItemResult = await ;*//*
             if (player.CurrentAttackPlayerItemId > 0)
             {
                 hasAttackItem = true;
@@ -485,3 +483,4 @@ namespace ActionCommandGame.Services
         }
     }
 }
+*/

@@ -1,5 +1,4 @@
-﻿using ActionCommandGame.Model;
-using ActionCommandGame.Services.Model.Results;
+﻿using ActionCommandGame.Services.Model.Results;
 using Microsoft.AspNetCore.Identity;
 
 namespace ActionCommandGame.Ui.WebApp.Models

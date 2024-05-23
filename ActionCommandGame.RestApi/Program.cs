@@ -4,6 +4,7 @@ using ActionCommandGame.RestApi.Security.Settings;
 using ActionCommandGame.RestApi.Service;
 using ActionCommandGame.Security.Model;
 using ActionCommandGame.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -54,12 +55,6 @@ builder.Services.AddAuthentication(options => {
     });
 
 
-
-
-/*builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.ClaimsIdentity.RoleClaimType = "Admin";
-});*/
 builder.Services.AddAuthorization();
 
 // Add services to the container.
@@ -78,8 +73,6 @@ builder.Services.AddScoped<GameService>();
 builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<UserRoleService>();
 builder.Services.AddScoped<AccountService>();
-
-
 
 
 var app = builder.Build();

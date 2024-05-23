@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ActionCommandGame.Helpers\ActionCommandGame.Helpers.csproj" />
-    <ProjectReference Include="..\ActionCommandGame.Model\ActionCommandGame.Model.csproj" />
     <ProjectReference Include="..\ActionCommandGame.Services.Model\ActionCommandGame.Services.Model.csproj" />
   </ItemGroup>
 

@@ -1,12 +1,4 @@
-﻿using ActionCommandGame.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-
-namespace ActionCommandGame.Services.Model.Results
+﻿namespace ActionCommandGame.Services.Model.Results
 {
     public class PlayerItemResult
     {
