@@ -18,7 +18,7 @@ namespace ActionCommandGame.Services
 
         public async Task<PlayerResult> Get(int id)
         {
-            //apart omdat entity er moeite mee heeft
+            
             var player = await _database.Players
          .SingleOrDefaultAsync(p => p.Id == id);
 
@@ -48,7 +48,7 @@ namespace ActionCommandGame.Services
 
         public async Task<PlayerResult> GetIdentityId(string id)
         {
-            //apart omdat entity er moeite mee heeft
+            
             var player = await _database.Players
          .SingleOrDefaultAsync(p => p.IdentityPlayerId.Equals(id));
 

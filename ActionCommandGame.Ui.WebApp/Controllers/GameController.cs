@@ -38,20 +38,9 @@ namespace ActionCommandGame.Ui.WebApp.Controllers
             {
                 return null;
             }
-            /*int playerId = _id;*/
+            
             var currentPlayer = await _playerSdk.GetIdentityId(userId);
-            /*  Player player = new Player
-              {
-                  Id = playerId,
-                  Name = currentPlayer.Name,
-                  Money = currentPlayer.Money,
-                  Experience = currentPlayer.Experience,
-                  LastActionExecutedDateTime = currentPlayer.LastActionExecutedDateTime,
-                  CurrentAttackPlayerItemId = currentPlayer.CurrentAttackPlayerItemId,
-                  CurrentDefensePlayerItemId = currentPlayer.CurrentDefensePlayerItemId,
-                  CurrentFuelPlayerItemId = currentPlayer.CurrentFuelPlayerItemId
-              };
-  */
+            
             var playerItems = await _playerItemSdk.Find();
             var items = await _itemSdk.Find();
 

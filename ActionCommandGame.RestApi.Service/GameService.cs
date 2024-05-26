@@ -39,8 +39,7 @@ namespace ActionCommandGame.RestApi.Service
 
         public async Task<ServiceResult<GameResult>> PerformAction(int playerId)
         {
-            //Check Cooldown
-            //SDK moet volledig weg en wordt service
+            
             Player player = await _database.Players.SingleOrDefaultAsync(p => p.Id == playerId);
             if(player == null)
             {
@@ -80,10 +79,10 @@ namespace ActionCommandGame.RestApi.Service
                 };
             }
 
-            //Het Selecteren van een random Positive game event
+           
 
             var hasAttackItem = false;
-            /*ItemResult attackItemResult = await ;*/
+            
             if (player.CurrentAttackPlayerItemId > 0)
             {
                 hasAttackItem = true;
@@ -91,7 +90,7 @@ namespace ActionCommandGame.RestApi.Service
 
             var query = _database.PositiveGameEvents.AsQueryable();
 
-            //If we don't have an attack item, we can only get low-reward items.
+            
             if (!hasAttackItem)
             {
                 query = query.Where(p => p.Money < 50);
@@ -112,7 +111,7 @@ namespace ActionCommandGame.RestApi.Service
 
             
 
-            //BEEINDIGEN van positive gameEvent
+          
 
             
             if (randomPositiveGameEvent == null)
@@ -132,7 +131,7 @@ namespace ActionCommandGame.RestApi.Service
                 };
             }
 
-            //Begin negative game event
+            
             var negativeGameEvents =  await _database.NegativeGameEvents
                 .ToListAsync();
 
@@ -149,8 +148,7 @@ namespace ActionCommandGame.RestApi.Service
             }).ToList();
 
             NegativeGameEvent randomNegativeGameEvent = GameEventHelper.GetRandomNegativeGameEvent(negativeGameEventsList);
-            //Einde NEGATIVE GAME EVENT
-            //var negativeGameEvent = await _negativeGameEventSdk.GetRandomNegativeGameEvent();
+         
 
 
 
@@ -164,17 +162,17 @@ namespace ActionCommandGame.RestApi.Service
             var newLevel = playerResult.GetLevel();
 
             var levelMessages = new List<ServiceMessage>();
-            //Check if we leveled up
+          
             if (oldLevel < newLevel)
             {
                 levelMessages = new List<ServiceMessage> { new ServiceMessage { Code = "LevelUp", Message = $"Congratulations, you arrived at level {newLevel}" } };
             }
 
-            //Consume fuel
+           
             var fuelMessages = await ConsumeFuel(player);
 
             var attackMessages = new List<ServiceMessage>();
-            //Consume attack when we got some loot
+           
             if (randomPositiveGameEvent.Money > 0)
             {
                 attackMessages.AddRange(await ConsumeAttack(player));
@@ -184,7 +182,7 @@ namespace ActionCommandGame.RestApi.Service
             var negativeGameEventMessages = new List<ServiceMessage>();
             if (randomNegativeGameEvent != null)
             {
-                //Check defense consumption
+                
                 if (player.CurrentDefensePlayerItemId > 0)
                 {
                     negativeGameEventMessages.Add(new ServiceMessage { Code = "DefenseWithGear", Message = randomNegativeGameEvent.DefenseWithGearDescription });
@@ -194,7 +192,7 @@ namespace ActionCommandGame.RestApi.Service
                 {
                     negativeGameEventMessages.Add(new ServiceMessage { Code = "DefenseWithoutGear", Message = randomNegativeGameEvent.DefenseWithoutGearDescription });
 
-                    //If we have no defense item, consume the defense loss from Fuel and Attack
+                    
                     defenseMessages.AddRange(await ConsumeFuel(player, randomNegativeGameEvent.DefenseLoss));
                     defenseMessages.AddRange(await ConsumeAttack(player, randomNegativeGameEvent.DefenseLoss));
                 }
@@ -216,7 +214,7 @@ namespace ActionCommandGame.RestApi.Service
                 IdentityPlayerId = player.IdentityPlayerId,
             };
 
-            //Save Player
+       
             await _playerService.Update(playerId, playerRequest);
 
             playerResult = await _playerService.Get(playerId);
@@ -241,7 +239,7 @@ namespace ActionCommandGame.RestApi.Service
                 Data = gameResult
             };
 
-            //Add all the messages to the player
+        
             serviceResult.WithMessages(levelMessages);
             serviceResult.WithMessages(warningMessages);
             serviceResult.WithMessages(fuelMessages);
@@ -282,7 +280,7 @@ namespace ActionCommandGame.RestApi.Service
 
             }).Where(pi => pi.PlayerId == playerId).ToListAsync();
 
-            // controleer voor persoon die geen items heeft
+           
             if(playerItemList == null)
             {
                 return new ServiceResult<BuyResult>().NotFound();
@@ -296,7 +294,7 @@ namespace ActionCommandGame.RestApi.Service
 
             player.Money -= item.Price;
 
-            //SaveChanges
+            
             PlayerRequest playerRequest = new PlayerRequest
             {
                 Name = player.Name,
@@ -308,7 +306,7 @@ namespace ActionCommandGame.RestApi.Service
                 CurrentFuelPlayerItemId = player.CurrentFuelPlayerItemId,
                 IdentityPlayerId = player.IdentityPlayerId,
             };
-            // update player
+          
             await _playerService.Update(playerId, playerRequest);
 
             await activateItem(playerId, playerItem.Id);
@@ -382,7 +380,7 @@ namespace ActionCommandGame.RestApi.Service
 
         private async Task<IList<ServiceMessage>> ConsumeFuel(Player player, int fuelLoss = 1)
         {
-            //if verwijderd hasValue
+            
             if (player.CurrentFuelPlayerItemId > 0)
             {
                 PlayerItem fuelPlayerItem = await _database.PlayerItems.FirstOrDefaultAsync(a => a.Id == player.CurrentFuelPlayerItemId);
@@ -392,7 +390,7 @@ namespace ActionCommandGame.RestApi.Service
                     await _playerItemService.Delete(player.CurrentFuelPlayerItemId);
 
                     IList<PlayerItem> ItemList = await _database.PlayerItems.ToListAsync();
-                    //Load a new Fuel Item from inventory
+                    
                     var newFuelPlayerItem = ItemList.Where(pi => pi.PlayerId == player.Id)
                         .Where(pi => pi.RemainingFuel > 0)
                         .OrderByDescending(pi => pi.RemainingFuel).FirstOrDefault();
@@ -440,7 +438,7 @@ namespace ActionCommandGame.RestApi.Service
 
         private async Task<IList<ServiceMessage>> ConsumeAttack(Player player, int attackLoss = 1)
         {
-            //hasValue verwijdert
+            
             if (player.CurrentAttackPlayerItemId >= 0)
             {
                 var oldAttackPlayerItem = await _database.PlayerItems.FirstOrDefaultAsync(a => a.Id == player.CurrentAttackPlayerItemId);
@@ -450,7 +448,7 @@ namespace ActionCommandGame.RestApi.Service
                     await _playerItemService.Delete(player.CurrentAttackPlayerItemId);
 
                     IList<PlayerItem> ItemList = await _database.PlayerItems.ToListAsync();
-                    //Load a new Attack Item from inventory
+                    
                     var newAttackItem = ItemList.Where(pi => pi.PlayerId == player.Id)
                         .Where(pi => pi.RemainingAttack > 0)
                         .OrderByDescending(pi => pi.RemainingAttack).FirstOrDefault();
@@ -484,7 +482,7 @@ namespace ActionCommandGame.RestApi.Service
             }
             else
             {
-                //If we don't have any attack tools, just consume more fuel in stead
+                
                 await ConsumeFuel(player);
             }
 
@@ -495,7 +493,7 @@ namespace ActionCommandGame.RestApi.Service
         {
             PlayerItem oldDefensePlayerItem = await _database.PlayerItems.FirstOrDefaultAsync(a => a.Id == playerResult.CurrentDefensePlayerItemId);
 
-            // hasvalue is weg
+            
             if (oldDefensePlayerItem != null)
             {
                 Item oldDefenseItem = await _database.Items.FirstOrDefaultAsync(a => a.Id == oldDefensePlayerItem.ItemId);
@@ -505,7 +503,7 @@ namespace ActionCommandGame.RestApi.Service
                     await _playerItemService.Delete(playerResult.CurrentDefensePlayerItemId);
 
                     IList<PlayerItem> playerItemList = await _database.PlayerItems.ToListAsync();
-                    //Load a new Defense Item from inventory
+                    
                     var newDefensePlayerItem = playerItemList.Where(pi => pi.PlayerId == playerResult.Id)
                         .Where(pi => pi.RemainingDefense > 0)
                         .OrderByDescending(pi => pi.RemainingDefense).FirstOrDefault();
@@ -542,7 +540,7 @@ namespace ActionCommandGame.RestApi.Service
             }
             else
             {
-                //If we don't have defensive gear, just consume more fuel in stead.
+                
                 await ConsumeFuel(playerResult);
             }
 

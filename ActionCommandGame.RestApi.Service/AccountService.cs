@@ -34,7 +34,7 @@ namespace ActionCommandGame.RestApi.Service
 
         public async Task<AccountResult> GetAccount(int id)
         {
-            //apart omdat entity er moeite mee heeft
+            
             var player = await _database.Players
          .SingleOrDefaultAsync(p => p.Id == id);
 
@@ -74,12 +74,7 @@ namespace ActionCommandGame.RestApi.Service
                 return null;
             }
 
-            /*AccountResult result = new AccountResult
-            {
-                Email = account.Email,
-                UserName = account.UserName,
-                PhoneNumber = account.PhoneNumber
-            };*/
+           
 
             account.UserName = request.UserName;
             account.Email = request.Email;
